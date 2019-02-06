@@ -16,7 +16,7 @@ function conv_date ($data,$inverti=false)
 function se_iscritto ($chatid,$tpreturn='NOME')
 {
 	$chatid = trim($chatid);
-	$urlCheck = 'http://www.protezionecivilecasarano.org/gestionale/api/check_reg.php?par='.$chatid;
+	$urlCheck = 'http://www.protezionecivilecasarano.org/gestnew/api/check_reg.php?par='.$chatid;
 	$json = file_get_contents($urlCheck);
 	$obj = json_decode($json,true);
 	$array = $obj[1];
@@ -191,7 +191,7 @@ if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizi
 		$codsocio = substr($domandaL,11);
 	
 	$codsocio = trim($codsocio);
-	$urlUser = 'http://www.protezionecivilecasarano.org/gestionale/api/read_user.php?codsocio='.$codsocio;
+	$urlUser = 'http://www.protezionecivilecasarano.org/gestnew/api/read_user.php?codsocio='.$codsocio;
 	$json = file_get_contents($urlUser);
 	$obj = json_decode($json,true);
 	$array = $obj[1];
@@ -207,7 +207,7 @@ if(substr($domandaL,0,10) == 'iscrizione' or substr($domandaL,0,11) == '/iscrizi
 		$risposta = trim('Ciao, ti ho riconosciuto, sei proprio '.$nome.' '.$cognome.'! D\'ora in poi saprò come chiamarti quando mi servirai.
 		
 		Se lo volessi comunicare direttamente in segreteria il tuo codice telegram è '.$chatId);
-		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user.php?codsocio='.$codsocio.'&chatid='.$chatId;
+		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user.php?codsocio='.$codsocio.'&chatid='.$chatId;
 		$json = file_get_contents($urlUserAppr);
 	}
 	
@@ -298,7 +298,7 @@ if(substr($domandaL,0,2) == 'si' or substr($domandaL,0,3) == '/si')
 	if(se_iscritto($chatId,'NOME')!='NO')
 	{
 		$codserv = trim($codserv);
-		$urlUser = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user_servizio.php?serv='.$codserv.'&chatid='.$chatId.'&risp=SI';
+		$urlUser = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user_servizio.php?serv='.$codserv.'&chatid='.$chatId.'&risp=SI';
 		$json = file_get_contents($urlUser);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -326,7 +326,7 @@ if(substr($domandaL,0,2) == 'no' or substr($domandaL,0,3) == '/no')
 	if(se_iscritto($chatId,'NOME')!='NO')
 	{
 		$codserv = trim($codserv);
-		$urlUser = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user_servizio.php?serv='.$codserv.'&chatid='.$chatId.'&risp=NO';
+		$urlUser = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user_servizio.php?serv='.$codserv.'&chatid='.$chatId.'&risp=NO';
 		$json = file_get_contents($urlUser);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -354,7 +354,7 @@ if(substr($domandaL,0,5) == 'luogo' or substr($domandaL,0,6) == '/luogo')
 	if(se_iscritto($chatId,'NOME')!='NO')
 	{
 		$codserv = trim($codserv);
-		$url = 'http://www.protezionecivilecasarano.org/gestionale/api/read_luogo_serv.php?serv='.$codserv;
+		$url = 'http://www.protezionecivilecasarano.org/gestnew/api/read_luogo_serv.php?serv='.$codserv;
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -391,7 +391,7 @@ if(substr($domandaL,0,9) == 'operatori' or substr($domandaL,0,10) == '/operatori
 	if(se_iscritto($chatId,'NOME')!='NO')
 	{
 		$codserv = trim($codserv);
-		$url = 'http://www.protezionecivilecasarano.org/gestionale/api/read_op_serv.php?serv='.$codserv;
+		$url = 'http://www.protezionecivilecasarano.org/gestnew/api/read_op_serv.php?serv='.$codserv;
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -419,7 +419,7 @@ if(substr($domandaL,0,13) == '/allertameteo')
 		$risposta = $istr_allerameteo;
 	if($codop == 'ultima')
 	{
-		$url = 'http://www.protezionecivilecasarano.org/gestionale/api/read_allerte_cvpc.php?par1=1';
+		$url = 'http://www.protezionecivilecasarano.org/gestnew/api/read_allerte_cvpc.php?par1=1';
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -434,7 +434,7 @@ if(substr($domandaL,0,13) == '/allertameteo')
 	}
 	if($codop == 'iscrizione')
 	{
-		$url = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=I';
+		$url = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=I';
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -449,7 +449,7 @@ if(substr($domandaL,0,13) == '/allertameteo')
 	}
 	if($codop == 'disiscrizione')
 	{
-		$url = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=D';
+		$url = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=D';
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -474,7 +474,7 @@ if(substr($domandaL,0,7) == '/scrivi')
 		$risposta = "Scrivo si, ma cosa? devi dirmi cosa mandare quindi, scivimi questo comando, così: /scrivi tutto il testo che vuoi mandare";
 	else
 	{
-		/*$url = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=D';
+		/*$url = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_user_allerte.php?chatid='.$chatId.'&nome='.$firstname.'&cognome='.$lastname.'&act=D';
 		$json = file_get_contents($url);
 		$obj = json_decode($json,true);
 		$array = $obj[1];
@@ -515,7 +515,7 @@ if(substr($domandaL,0,7) == '/scrivi')
 //---- KEY FRASE
 if((trova_parola('dimmi',$domandaL) or trova_parola('dirmi',$domandaL)) and trova_parola('frase',$domandaL))
 {
-	$urlUser = 'http://www.protezionecivilecasarano.org/gestionale/api/read_frase.php';
+	$urlUser = 'http://www.protezionecivilecasarano.org/gestnew/api/read_frase.php';
 	$json = file_get_contents($urlUser);
 	$obj = json_decode($json,true);
 	$frase = $obj["result"];
@@ -532,7 +532,7 @@ if($domandaL == '/iscriviavvisi' )
 {
 	
 		$risposta = trim('Perfetto! Grazie a quanto hai appena fatto sarai sempre informato di quanto sta succedendo nella tua città. Puoi richiederne la cancellazione con il comando /cancellaavvisi. Ti voglio inoltre ricordare che puoi contattarci direttamente per qualsiasi cosa, come? scrivi /contatti e avrai tutto più chiaro.');
-		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestionale/api/registra_utente_avvisi.php?chatid='.$chatId;
+		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestnew/api/registra_utente_avvisi.php?chatid='.$chatId;
 		$json = file_get_contents($urlUserAppr);
 	
 
@@ -543,7 +543,7 @@ if($domandaL == '/cancellaavvisi' )
 {
 	
 		$risposta = trim('Mi dispiace per la tua scelta ma non ti preoccupare da ora in poi non verrai più avvisato di nulla. Ti voglio inoltre ricordare che puoi contattarci direttamente per qualsiasi cosa, come? scrivi /contatti e avrai tutto più chiaro.');
-		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestionale/api/cancella_utente_avvisi.php?chatid='.$chatId;
+		$urlUserAppr = 'http://www.protezionecivilecasarano.org/gestnew/api/cancella_utente_avvisi.php?chatid='.$chatId;
 		$json = file_get_contents($urlUserAppr);
 	
 
